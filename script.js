@@ -3,6 +3,8 @@ $("#currentDay").text(moment().format('dddd, MMMM Do YYYY'));
 var currentTime = moment().format('HH');
 console.log(currentTime);
 
+var storedData = [];
+
 for (var i = 0; i < 9; i++) {
     var rowTime = i + 9;
     var formattedTime;
@@ -31,6 +33,24 @@ for (var i = 0; i < 9; i++) {
         "<div class='col-2 p-0 save-btn'><button class='saveBtn w-100 h-100'><i class='fas fa-save fa-2x'></i></button></div>" +
         "</div>");
 
+    newRow.attr('id', i);
+
     //Appends the new row to the page
     $(".container").append(newRow);
+
+    renderStoredData(i);
 }
+
+//
+function renderStoredData(rowNum) {
+    $("#" + rowNum).children(".description").text(storedData[rowNum]);
+}
+//
+
+$(".save-btn").on("click", function () {
+    //
+    storedData[parseInt($(this).parent().attr('id'))] = $(this).parent().children(".description").val();
+    //
+    console.log(storedData[parseInt($(this).parent().attr('id'))]);
+    console.log(storedData);
+});
