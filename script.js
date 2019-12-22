@@ -1,4 +1,4 @@
-$("#currentDay").text(moment().format('dddd, MMMM Do YYYY'));
+$("#current-day").text(moment().format('dddd, MMMM Do YYYY'));
 
 var currentTime = moment().format('HH');
 
@@ -33,22 +33,24 @@ for (var i = 0; i < 9; i++) {
         currentClass = 'future';
 
     //Generates a row for each work hour
+
+    //change class names
     var newRow = $("<div class = 'row'>" +
-        "<div class='col-2 py-2 hour'>" + formattedTime + "</div>" +
-        "<div class='col-8 p-0 description " + currentClass + "'><textarea class='w-100 h-100 user-input'>" + userData[i] + "</textarea></div>" +
-        "<div class='col-2 p-0 save-btn'><button class='saveBtn w-100 h-100'><i class='fas fa-save fa-2x'></i></button></div>" +
+        "<div class='col-2 py-2 hour-display'>" + formattedTime + "</div>" +
+        "<div class='col-8 p-0 user-input-div'><textarea class='w-100 h-100 user-input " + currentClass + "'>" + userData[i] + "</textarea></div>" +
+        "<div class='col-2 p-0 save-btn-div'><button class='save-btn w-100 h-100'>Save</button></div>" +
         "</div>");
     //Adds a unique id for each row, used to store data
     newRow.attr('id', i);
 
     //Appends the new row to the page
-    $(".container").append(newRow);
+    $("#wrapper").append(newRow);
 }
 
 
 $(".save-btn").on("click", function () {
-    var currentRow = parseInt($(this).parent().attr('id'));
-    var textInputVal = $(this).parent().children(".description").children(".user-input").val();
+    var currentRow = parseInt($(this).parent().parent().attr('id'));
+    var textInputVal = $(this).parent().parent().children(".user-input-div").children(".user-input").val();
 
     userData[currentRow] = textInputVal;
     localStorage.setItem("userCalendar", userData);
