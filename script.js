@@ -9,8 +9,6 @@ if (storedUserData != null) {
     userData = storedUserData.split(",");
 }
 
-
-
 for (var i = 0; i < 9; i++) {
     var rowTime = i + 9;
     var formattedTime;
@@ -33,13 +31,12 @@ for (var i = 0; i < 9; i++) {
         currentClass = 'future';
 
     //Generates a row for each work hour
-
-    //change class names
     var newRow = $("<div class = 'row'>" +
         "<div class='col-2 py-2 hour-display'>" + formattedTime + "</div>" +
         "<div class='col-8 p-0 user-input-div'><textarea class='w-100 h-100 user-input " + currentClass + "'>" + userData[i] + "</textarea></div>" +
         "<div class='col-2 p-0 save-btn-div'><button class='save-btn w-100 h-100'>Save</button></div>" +
         "</div>");
+
     //Adds a unique id for each row, used to store data
     newRow.attr('id', i);
 
